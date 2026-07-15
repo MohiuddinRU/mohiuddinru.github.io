@@ -22,7 +22,9 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Contact form: attach approximate IP/geolocation, then submit to Web3Forms.
+  // Contact form: attach approximate IP/geolocation, then submit to FormSubmit.
+  // FormSubmit needs no API key — the recipient email is the endpoint.
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/mohiuddin.ice.ru@gmail.com";
   const form = document.getElementById("contact-form");
   if (form) {
     const statusEl = document.getElementById("form-status");
@@ -46,21 +48,21 @@
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
-      if (form.botcheck && form.botcheck.checked) return; // honeypot tripped
+      if (form._honey && form._honey.value) return; // honeypot tripped
 
       setStatus("Sending…", "");
       submitBtn.disabled = true;
 
       const payload = Object.fromEntries(new FormData(form).entries());
 
-      fetch("https://api.web3forms.com/submit", {
+      fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       })
         .then(function (res) { return res.json(); })
         .then(function (data) {
-          if (data.success) {
+          if (data.success === true || data.success === "true") {
             form.reset();
             setStatus("Thanks! Your message has been sent.", "ok");
           } else {

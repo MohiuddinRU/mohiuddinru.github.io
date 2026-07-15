@@ -256,12 +256,12 @@
       <div class="message-form-wrap">
         <h3>Or send me a message</h3>
         <form id="contact-form" class="message-form" novalidate>
-          <!-- Replace with your own free access key from https://web3forms.com (it emails the key to you) -->
-          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-          <input type="hidden" name="subject" value="New message from your portfolio" />
-          <input type="hidden" name="from_name" value="Portfolio contact form" />
+          <!-- FormSubmit config: no signup, no API key — the recipient email is the endpoint (see main.js) -->
+          <input type="hidden" name="_subject" value="New message from your portfolio" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
           <!-- Honeypot: bots fill this, humans never see it -->
-          <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none" />
+          <input type="text" name="_honey" tabindex="-1" aria-hidden="true" autocomplete="off" style="display:none" />
           <!-- Auto-captured metadata -->
           <input type="hidden" name="ip_address" id="f-ip" />
           <input type="hidden" name="location" id="f-location" />

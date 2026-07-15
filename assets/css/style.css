@@ -94,6 +94,25 @@ img { max-width: 100%; display: block; }
 .about-facts ul li:last-child { border-bottom: 0; }
 .about-facts ul li span { display: block; color: var(--text-soft); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
 
+/* ---------- Timeline (Experience & Education) ---------- */
+.timeline { position: relative; margin: 0; padding: 0 0 0 26px; }
+.timeline::before {
+  content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--border);
+}
+.timeline-item { position: relative; padding: 0 0 34px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: ""; position: absolute; left: -26px; top: 6px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent);
+}
+.timeline-head h3 { font-size: 1.1rem; }
+.timeline-company { display: block; color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-top: 2px; }
+.timeline-meta { display: block; color: var(--text-soft); font-size: 0.85rem; margin-top: 2px; }
+.timeline-points { margin: 14px 0 0; padding-left: 18px; list-style: disc; }
+.timeline-points li { color: var(--text-soft); font-size: 0.95rem; margin-bottom: 8px; }
+
 /* ---------- Skills ---------- */
 .skills-groups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .skill-group h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-soft); margin-bottom: 14px; }

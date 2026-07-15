@@ -1,0 +1,9 @@
+# Local environment / secrets — never commit these
+.env
+.env.*
+*.local
+config.local.js
+assets/js/config.local.js
+
+# OS / editor cruft
+.DS_Store

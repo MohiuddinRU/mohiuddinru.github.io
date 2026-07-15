@@ -252,6 +252,39 @@
         <li><a href="https://github.com/MohiuddinRU" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/mohiuddinru/" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
+
+      <div class="message-form-wrap">
+        <h3>Or send me a message</h3>
+        <form id="contact-form" class="message-form" novalidate>
+          <!-- Replace with your own free access key from https://web3forms.com (it emails the key to you) -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+          <input type="hidden" name="subject" value="New message from your portfolio" />
+          <input type="hidden" name="from_name" value="Portfolio contact form" />
+          <!-- Honeypot: bots fill this, humans never see it -->
+          <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none" />
+          <!-- Auto-captured metadata -->
+          <input type="hidden" name="ip_address" id="f-ip" />
+          <input type="hidden" name="location" id="f-location" />
+          <input type="hidden" name="coordinates" id="f-coords" />
+          <input type="hidden" name="user_agent" id="f-ua" />
+
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input type="text" id="f-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="f-email">Email <span class="opt">(optional — so I can reply)</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="f-submit">Send message</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          <p class="form-note">When you send a message, your approximate location and IP address are included to help prevent spam.</p>
+        </form>
+      </div>
     </section>
   </main>
 

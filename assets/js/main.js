@@ -22,22 +22,6 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Email button: copy the address and confirm with a toast. The mailto still
-  // opens a mail app for visitors who have one — this just guarantees a click
-  // always does something, even when no default mail client is configured.
-  const emailLink = document.getElementById("email-link");
-  if (emailLink) {
-    emailLink.addEventListener("click", function () {
-      const email = emailLink.getAttribute("data-email");
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard
-          .writeText(email)
-          .then(function () { showToast("Email address copied to clipboard ✓", "ok"); })
-          .catch(function () { /* clipboard blocked — mailto still fires */ });
-      }
-    });
-  }
-
   // Contact form: attach approximate IP/geolocation, then submit to FormSubmit.
   // FormSubmit needs no API key — the recipient email is the endpoint.
   const FORM_ENDPOINT = "https://formsubmit.co/ajax/mohiuddin.ice.ru@gmail.com";

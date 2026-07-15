@@ -138,6 +138,7 @@ img { max-width: 100%; display: block; }
 .project-links { display: flex; gap: 12px; }
 .project-links a { color: var(--accent); font-size: 0.85rem; font-weight: 600; }
 .project-links a:hover { text-decoration: underline; }
+.project-context { color: var(--accent); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
 .project-card p { margin: 0; color: var(--text-soft); font-size: 0.95rem; flex: 1; }
 
 /* ---------- Contact ---------- */

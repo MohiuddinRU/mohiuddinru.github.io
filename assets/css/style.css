@@ -168,10 +168,22 @@ img { max-width: 100%; display: block; }
 .message-form textarea { resize: vertical; }
 .message-form .btn { width: 100%; border: 0; cursor: pointer; }
 .message-form .btn:disabled { opacity: 0.6; cursor: default; }
-.form-status { text-align: center; margin: 14px 0 0; font-size: 0.9rem; min-height: 1.2em; }
-.form-status.ok { color: #1a7f37; }
-.form-status.err { color: #c1121f; }
-.form-note { text-align: center; margin: 12px 0 0; font-size: 0.78rem; color: var(--text-soft); }
+.form-note { text-align: center; margin: 14px 0 0; font-size: 0.78rem; color: var(--text-soft); }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 24px);
+  max-width: 90vw; padding: 14px 22px; border-radius: 12px;
+  background: var(--text); color: #fff; font-size: 0.92rem; font-weight: 500;
+  box-shadow: var(--shadow); opacity: 0; pointer-events: none; z-index: 200;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.ok { background: #1a7f37; }
+.toast.err { background: #c1121f; }
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: opacity 0.28s ease; transform: translate(-50%, 0); }
+}
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--border); padding: 32px 0; }

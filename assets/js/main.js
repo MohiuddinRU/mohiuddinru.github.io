@@ -22,13 +22,29 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Email button: copy the address and confirm with a toast. The mailto still
+  // opens a mail app for visitors who have one — this just guarantees a click
+  // always does something, even when no default mail client is configured.
+  const emailLink = document.getElementById("email-link");
+  if (emailLink) {
+    emailLink.addEventListener("click", function () {
+      const email = emailLink.getAttribute("data-email");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(email)
+          .then(function () { showToast("Email address copied to clipboard ✓", "ok"); })
+          .catch(function () { /* clipboard blocked — mailto still fires */ });
+      }
+    });
+  }
+
   // Contact form: attach approximate IP/geolocation, then submit to FormSubmit.
   // FormSubmit needs no API key — the recipient email is the endpoint.
   const FORM_ENDPOINT = "https://formsubmit.co/ajax/mohiuddin.ice.ru@gmail.com";
   const form = document.getElementById("contact-form");
   if (form) {
-    const statusEl = document.getElementById("form-status");
     const submitBtn = document.getElementById("f-submit");
+    const submitLabel = submitBtn.textContent;
 
     setValue("f-ua", navigator.userAgent);
 
@@ -50,8 +66,8 @@
       event.preventDefault();
       if (form._honey && form._honey.value) return; // honeypot tripped
 
-      setStatus("Sending…", "");
       submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
 
       const payload = Object.fromEntries(new FormData(form).entries());
 
@@ -64,24 +80,41 @@
         .then(function (data) {
           if (data.success === true || data.success === "true") {
             form.reset();
-            setStatus("Thanks! Your message has been sent.", "ok");
+            showToast("Thanks! Your message has been sent.", "ok");
           } else {
-            setStatus(data.message || "Something went wrong — please email me instead.", "err");
+            showToast(data.message || "Something went wrong — please email me instead.", "err");
           }
         })
         .catch(function () {
-          setStatus("Network error — please email me instead.", "err");
+          showToast("Network error — please email me instead.", "err");
         })
-        .finally(function () { submitBtn.disabled = false; });
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitLabel;
+        });
     });
 
     function setValue(id, val) {
       const el = document.getElementById(id);
       if (el && val != null) el.value = val;
     }
-    function setStatus(msg, kind) {
-      statusEl.textContent = msg;
-      statusEl.className = "form-status" + (kind ? " " + kind : "");
+  }
+
+  // Slide-in toast notification; auto-dismisses after a few seconds.
+  function showToast(message, kind) {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      document.body.appendChild(toast);
     }
+    toast.textContent = message;
+    toast.className = "toast show" + (kind ? " " + kind : "");
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(function () {
+      toast.className = "toast" + (kind ? " " + kind : "");
+    }, 4500);
   }
 })();
